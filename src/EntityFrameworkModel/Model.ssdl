@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Schema Namespace="Database" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+    <EntityContainer Name="DatabaseContainer">
+		<EntitySet Name="Artists" EntityType="Database.Artists" store:Type="Tables" Schema="dbo" />
+		<EntitySet Name="Genres" EntityType="Database.Genres" store:Type="Tables" Schema="dbo" />
+		<AssociationSet Name="FK_Artist_Genre" Association="Database.FK_Artist_Genre">
+			<End Role="ArtistsToGenre" EntitySet="Genres" />
+			<End Role="GenreToArtists" EntitySet="Artists" />
+		</AssociationSet>
+	</EntityContainer>
+	<EntityType Name="Artists">
+		<Key>
+			<PropertyRef Name="ID" />
+		</Key>
+		<Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+		<Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+		<Property Name="GenreID" Type="int" Nullable="false" />
+	</EntityType>
+	<EntityType Name="Genres">
+		<Key>
+			<PropertyRef Name="ID" />
+		</Key>
+		<Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+		<Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+	</EntityType>
+	<Association Name="FK_Artist_Genre">
+		<End Role="ArtistsToGenre" Type="Database.Genres" Multiplicity="1" />
+		<End Role="GenreToArtists" Type="Database.Artists" Multiplicity="*" />
+		<ReferentialConstraint>
+			<Principal Role="ArtistsToGenre">
+				<PropertyRef Name="ID" />
+			</Principal>
+			<Dependent Role="GenreToArtists">
+				<PropertyRef Name="GenreID" />
+			</Dependent>
+		</ReferentialConstraint>
+	</Association>
+</Schema>

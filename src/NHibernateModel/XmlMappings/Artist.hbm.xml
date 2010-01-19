@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="NHibernateModel" assembly="NHibernateModel">
+	<class name="Artist" table="Artists">
+		<id name="ID" type="Int32">
+			<generator class="native" />
+		</id>
+		<property name="Name" length="50" not-null="true" />
+		<many-to-one name="Genre" column="GenreID" not-null="true" />
+	</class>
+</hibernate-mapping>

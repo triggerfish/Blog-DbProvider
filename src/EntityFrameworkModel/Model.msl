@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+    <EntityContainerMapping StorageEntityContainer="DatabaseContainer" CdmEntityContainer="DataContext">
+		<EntitySetMapping Name="Foo">
+			<EntityTypeMapping TypeName="IsTypeOf(ArtistsModel.Foo)">
+				<MappingFragment StoreEntitySet="Artists">
+					<ScalarProperty Name="ID" ColumnName="ID" />
+					<ScalarProperty Name="Name" ColumnName="Name" />
+				</MappingFragment>
+			</EntityTypeMapping>
+		</EntitySetMapping>
+		<EntitySetMapping Name="Bar">
+			<EntityTypeMapping TypeName="IsTypeOf(ArtistsModel.Bar)">
+				<MappingFragment StoreEntitySet="Genres">
+					<ScalarProperty Name="ID" ColumnName="ID" />
+					<ScalarProperty Name="Name" ColumnName="Name" />
+				</MappingFragment>
+			</EntityTypeMapping>
+		</EntitySetMapping>
+		<AssociationSetMapping Name="FK_Relationship" TypeName="ArtistsModel.FK_Relationship" StoreEntitySet="Artists">
+			<EndProperty Name="FooToBar">
+				<ScalarProperty Name="ID" ColumnName="GenreID" />
+			</EndProperty>
+			<EndProperty Name="BarToFoo">
+				<ScalarProperty Name="ID" ColumnName="ID" />
+			</EndProperty>
+		</AssociationSetMapping>
+	</EntityContainerMapping>
+</Mapping>
