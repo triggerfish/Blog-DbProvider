@@ -17,7 +17,7 @@
 				</MappingFragment>
 			</EntityTypeMapping>
 		</EntitySetMapping>
-		<AssociationSetMapping Name="FK_Relationship" TypeName="ArtistsModel.FK_Relationship" StoreEntitySet="Artists">
+		<AssociationSetMapping Name="FK_Foo_Bar" TypeName="ArtistsModel.FK_Foo_Bar" StoreEntitySet="Artists">
 			<EndProperty Name="FooToBar">
 				<ScalarProperty Name="ID" ColumnName="GenreID" />
 			</EndProperty>

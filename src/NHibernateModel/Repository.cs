@@ -12,7 +12,7 @@ namespace NHibernateModel
 	{
 		private Session m_session = new Session();
 
-		public Repository(string a_strConnection)
+		public Repository(string strConnection)
 		{
 		}
 
@@ -45,11 +45,11 @@ namespace NHibernateModel
 			}
 		}
 
-		public IEnumerable<IArtist> GetArtistsByGenre(string a_genre)
+		public IEnumerable<IArtist> GetArtistsByGenre(string genre)
 		{
 			try
 			{
-				return m_session.CurrentSession.Linq<Artist>().Where(a => a.Genre.Name == a_genre).Cast<IArtist>();
+				return m_session.CurrentSession.Linq<Artist>().Where(a => a.Genre.Name == genre).Cast<IArtist>();
 			}
 			catch (Exception)
 			{
@@ -63,9 +63,9 @@ namespace NHibernateModel
 			GC.SuppressFinalize(this);
 		}
 
-		protected virtual void Dispose(bool a_disposing)
+		protected virtual void Dispose(bool disposing)
 		{
-			if (a_disposing)
+			if (disposing)
 			{
 				m_session.Close();
 			}

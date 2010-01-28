@@ -10,47 +10,24 @@ namespace EntityFrameworkModel
 	[EdmEntityTypeAttribute(NamespaceName = "ArtistsModel", Name = "Bar")]
 	public partial class Genre : EntityObject, IGenre
 	{
-		private int m_id;
-		private string m_name;
-
 		[EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
-		public int ID
-		{
-			get
-			{
-				return this.m_id;
-			}
-			private set
-			{
-				this.m_id = value;
-			}
-		}
+		public int ID { get; set; }
 
 		[EdmScalarPropertyAttribute(IsNullable = false)]
-		public string Name
-		{
-			get
-			{
-				return this.m_name;
-			}
-			set
-			{
-				this.m_name = value;
-			}
-		}
+		public string Name { get; set; }
 
-		[EdmRelationshipNavigationPropertyAttribute("ArtistsModel", "FK_Relationship", "BarToFoo")]
-		public EntityCollection<Artist> FooFK
+		[EdmRelationshipNavigationPropertyAttribute("ArtistsModel", "FK_Foo_Bar", "BarToFoo")]
+		public EntityCollection<Artist> Foos
 		{
 			get
 			{
-				return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Artist>("ArtistsModel.FK_Relationship", "BarToFoo");
+				return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Artist>("ArtistsModel.FK_Foo_Bar", "BarToFoo");
 			}
 			set
 			{
 				if ((value != null))
 				{
-					((IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Artist>("ArtistsModel.FK_Relationship", "BarToFoo", value);
+					((IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Artist>("ArtistsModel.FK_Foo_Bar", "BarToFoo", value);
 				}
 			}
 		}

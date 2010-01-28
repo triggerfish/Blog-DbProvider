@@ -3,7 +3,7 @@
 	<EntityContainer Name="DataContext">
 		<EntitySet Name="Foo" EntityType="ArtistsModel.Foo" />
 		<EntitySet Name="Bar" EntityType="ArtistsModel.Bar" />
-		<AssociationSet Name="FK_Relationship" Association="ArtistsModel.FK_Relationship">
+		<AssociationSet Name="FK_Foo_Bar" Association="ArtistsModel.FK_Foo_Bar">
 			<End Role="FooToBar" EntitySet="Bar" />
 			<End Role="BarToFoo" EntitySet="Foo" />
 		</AssociationSet>
@@ -14,7 +14,7 @@
 		</Key>
 		<Property Name="ID" Type="Int32" Nullable="false" />
 		<Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-		<NavigationProperty Name="BarFK" Relationship="ArtistsModel.FK_Relationship" FromRole="BarToFoo" ToRole="FooToBar" />
+		<NavigationProperty Name="Bar" Relationship="ArtistsModel.FK_Foo_Bar" FromRole="BarToFoo" ToRole="FooToBar" />
 	</EntityType>
 	<EntityType Name="Bar">
 		<Key>
@@ -22,9 +22,9 @@
 		</Key>
 		<Property Name="ID" Type="Int32" Nullable="false" />
 		<Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-		<NavigationProperty Name="FooFK" Relationship="ArtistsModel.FK_Relationship" FromRole="FooToBar" ToRole="BarToFoo" />
+		<NavigationProperty Name="Foos" Relationship="ArtistsModel.FK_Foo_Bar" FromRole="FooToBar" ToRole="BarToFoo" />
 	</EntityType>
-	<Association Name="FK_Relationship">
+	<Association Name="FK_Foo_Bar">
 		<End Role="FooToBar" Type="ArtistsModel.Bar" Multiplicity="1" />
 		<End Role="BarToFoo" Type="ArtistsModel.Foo" Multiplicity="*" />
 	</Association>

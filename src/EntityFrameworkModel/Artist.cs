@@ -10,67 +10,38 @@ namespace EntityFrameworkModel
 	[EdmEntityTypeAttribute(NamespaceName = "ArtistsModel", Name = "Foo")]
 	public class Artist : EntityObject, IArtist
 	{
-		private int m_id;
-		private string m_name;
-
 		[EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
-		public int ID
-		{
-			get
-			{
-				return this.m_id;
-			}
-			private set
-			{
-				this.m_id = value;
-			}
-		}
+		public int ID { get; set; }
 
 		[EdmScalarPropertyAttribute(IsNullable = false)]
-		public string Name
+		public string Name { get; set; }
+
+		[EdmRelationshipNavigationPropertyAttribute("ArtistsModel", "FK_Foo_Bar", "FooToBar")]
+		public Genre Bar
 		{
-			get
-			{
-				return this.m_name;
-			}
-			set
-			{
-				this.m_name = value;
-			}
+			get	{ return BarReference.Value; }
+			set	{ BarReference.Value = value;	}
 		}
 
-		[EdmRelationshipNavigationPropertyAttribute("ArtistsModel", "FK_Relationship", "FooToBar")]
-		public Genre BarFK
+		public EntityReference<Genre> BarReference
 		{
 			get
 			{
-				return BarFKReference.Value;
-			}
-			set
-			{
-				BarFKReference.Value = value;
-			}
-		}
-
-		public EntityReference<Genre> BarFKReference
-		{
-			get
-			{
-				return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Genre>("ArtistsModel.FK_Relationship", "FooToBar");
+				return ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Genre>("ArtistsModel.FK_Foo_Bar", "FooToBar");
 			}
 			set
 			{
 				if ((value != null))
 				{
-					((IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Genre>("ArtistsModel.FK_Relationship", "FooToBar", value);
+					((IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Genre>("ArtistsModel.FK_Foo_Bar", "FooToBar", value);
 				}
 			}
 		}
 
-		public IGenre Genre
+		IGenre IArtist.Genre
 		{
-			get { return BarFK; }
-			set { BarFK = value as Genre; }
+			get { return Bar; }
+			set { Bar = value as Genre; }
 		}
 	}
 }

@@ -57,14 +57,14 @@ namespace DbProvider
 
 		//******* Implementation *********
 
-		private void PopulateList(IRepository a_repository, string a_genre)
+		private void PopulateList(IRepository repository, string genre)
 		{
 			m_list.Items.Clear();
 
 			StringWriter sw = new StringWriter();
-			a_repository.SQLlog = sw;
+			repository.SQLlog = sw;
 
-			IEnumerable<IArtist> artists = a_repository.GetArtistsByGenre(a_genre);
+			IEnumerable<IArtist> artists = repository.GetArtistsByGenre(genre);
 
 			foreach (IArtist artist in artists)
 			{

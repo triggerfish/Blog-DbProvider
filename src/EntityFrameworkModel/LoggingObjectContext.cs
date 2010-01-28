@@ -9,10 +9,10 @@ namespace EntityFrameworkModel
     {
         private TextWriter m_log;
 
-		public LoggingObjectContext(string a_strConnection, string a_strName)
+		public LoggingObjectContext(string strConnection, string strName)
             : base(EntityConnectionWrapperUtils.CreateEntityConnectionWithWrappers(
-					a_strConnection,
-					"EFTracingProvider"), a_strName)
+					strConnection,
+					"EFTracingProvider"), strName)
         {
         }
 

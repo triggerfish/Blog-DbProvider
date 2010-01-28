@@ -14,6 +14,6 @@ namespace Model
 
 		IEnumerable<IGenre> Genres { get; }
 
-		IEnumerable<IArtist> GetArtistsByGenre(string a_genre);
+		IEnumerable<IArtist> GetArtistsByGenre(string genre);
 	}
 }

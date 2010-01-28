@@ -7,7 +7,7 @@ using System.Data.Objects.DataClasses;
 using System.Data.Metadata.Edm;
 
 [assembly: EdmSchemaAttribute()]
-[assembly: EdmRelationshipAttribute("ArtistsModel", "FK_Relationship", "FooToBar", RelationshipMultiplicity.One, typeof(EntityFrameworkModel.Genre), "BarToFoo", RelationshipMultiplicity.Many, typeof(EntityFrameworkModel.Artist))]
+[assembly: EdmRelationshipAttribute("ArtistsModel", "FK_Foo_Bar", "FooToBar", RelationshipMultiplicity.One, typeof(EntityFrameworkModel.Genre), "BarToFoo", RelationshipMultiplicity.Many, typeof(EntityFrameworkModel.Artist))]
 
 namespace EntityFrameworkModel
 {
@@ -16,8 +16,8 @@ namespace EntityFrameworkModel
 		private ObjectQuery<Artist> m_artists;
 		private ObjectQuery<Genre> m_genres;
 
-		public DataContext(string a_strConnection)
-			: base(a_strConnection, "DataContext")
+		public DataContext(string strConnection)
+			: base(strConnection, "DataContext")
 		{
 		}
 

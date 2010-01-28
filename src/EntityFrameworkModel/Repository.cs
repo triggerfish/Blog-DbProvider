@@ -12,9 +12,9 @@ namespace EntityFrameworkModel
 	{
 		private DataContext m_ctx;
 
-		public Repository(string a_strConnection)
+		public Repository(string strConnection)
 		{
-			m_ctx = new DataContext(a_strConnection);
+			m_ctx = new DataContext(strConnection);
 		}
 
 		~Repository()
@@ -35,7 +35,7 @@ namespace EntityFrameworkModel
 		{
 			get
 			{
-				return m_ctx.Artists.Include("BarFK").AsEnumerable().Cast<IArtist>();
+				return m_ctx.Artists.Include("Bar").AsEnumerable().Cast<IArtist>();
 			}
 		}
 
@@ -47,11 +47,11 @@ namespace EntityFrameworkModel
 			}
 		}
 
-		public IEnumerable<IArtist> GetArtistsByGenre(string a_genre)
+		public IEnumerable<IArtist> GetArtistsByGenre(string genre)
 		{
 			try
 			{
-				return m_ctx.Artists.Include("BarFK").Where(a => a.BarFK.Name == a_genre).AsEnumerable().Cast<IArtist>();
+				return m_ctx.Artists.Include("Bar").Where(a => a.Bar.Name == genre).AsEnumerable().Cast<IArtist>();
 			}
 			catch (Exception)
 			{
@@ -65,9 +65,9 @@ namespace EntityFrameworkModel
 			GC.SuppressFinalize(this);
 		}
 
-		protected virtual void Dispose(bool a_disposing)
+		protected virtual void Dispose(bool disposing)
 		{
-			if (a_disposing)
+			if (disposing)
 			{
 				m_ctx.Dispose();
 			}

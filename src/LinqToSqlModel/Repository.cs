@@ -15,9 +15,9 @@ namespace LinqToSqlModel
 		private Table<Genre> m_genres;
 		private Table<Artist> m_artists;
 
-		public Repository(string a_strConnection)
+		public Repository(string strConnection)
 		{
-			m_ctx = new DataContext(a_strConnection);
+			m_ctx = new DataContext(strConnection);
 
 			DataLoadOptions dlo = new DataLoadOptions();
 			dlo.LoadWith<Artist>(c => c.Genre);
@@ -63,13 +63,13 @@ namespace LinqToSqlModel
 			}
 		}
 
-		public IEnumerable<IArtist> GetArtistsByGenre(string a_genre)
+		public IEnumerable<IArtist> GetArtistsByGenre(string genre)
 		{
 			try
 			{
 				return
 					(from a in Artists
-					 where a.Genre.Name == a_genre
+					 where a.Genre.Name == genre
 					 select a);
 			}
 			catch (Exception)
@@ -84,9 +84,9 @@ namespace LinqToSqlModel
 			GC.SuppressFinalize(this);
 		}
 
-		protected virtual void Dispose(bool a_disposing)
+		protected virtual void Dispose(bool disposing)
 		{
-			if (a_disposing)
+			if (disposing)
 			{
 				m_ctx.Dispose();
 			}
