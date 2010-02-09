@@ -5,9 +5,9 @@
 			<generator class="native" />
 		</id>
 		<property name="Name" length="50" not-null="true" />
-		<bag name="Artists" table="Artists" inverse="true">
+		<list name="Artists" table="Artists" inverse="true" cascade="all">
 			<key column="GenreID" />
 			<one-to-many class="Artist"/>
-		</bag>
+		</list>
 	</class>
 </hibernate-mapping>

@@ -10,10 +10,11 @@ namespace NHibernateModel
 {
 	public class Repository : IRepository, IDisposable
 	{
-		private Session m_session = new Session();
+		private UnitOfWork m_unitOfWork = new UnitOfWork();
 
 		public Repository(string strConnection)
 		{
+			m_unitOfWork.Begin();
 		}
 
 		~Repository()
@@ -33,7 +34,7 @@ namespace NHibernateModel
 		{
 			get 
 			{
-				return m_session.CurrentSession.Linq<Artist>().Cast<IArtist>();
+				return m_unitOfWork.Session.Linq<Artist>().Cast<IArtist>();
 			}
 		}
 
@@ -41,20 +42,13 @@ namespace NHibernateModel
 		{
 			get 
 			{
-				return m_session.CurrentSession.Linq<Genre>().Cast<IGenre>();
+				return m_unitOfWork.Session.Linq<Genre>().Cast<IGenre>();
 			}
 		}
 
 		public IEnumerable<IArtist> GetArtistsByGenre(string genre)
 		{
-			try
-			{
-				return m_session.CurrentSession.Linq<Artist>().Where(a => a.Genre.Name == genre).Cast<IArtist>();
-			}
-			catch (Exception)
-			{
-				return Artists;
-			}
+			return m_unitOfWork.Session.Linq<Artist>().Where(a => a.Genre.Name == genre).Cast<IArtist>();
 		}
 
 		public void Dispose()
@@ -67,7 +61,7 @@ namespace NHibernateModel
 		{
 			if (disposing)
 			{
-				m_session.Close();
+				m_unitOfWork.End();
 			}
 		}
 	}

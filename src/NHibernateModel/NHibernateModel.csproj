@@ -75,7 +75,7 @@
     <Compile Include="Genre.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Session.cs" />
+    <Compile Include="UnitOfWork.cs" />
     <Compile Include="SQLlogger.cs" />
   </ItemGroup>
   <ItemGroup>
